@@ -1,0 +1,239 @@
+/* Reset de márgenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eef2f3;
+    color: #333;
+    line-height: 1.6;
+    padding: 0;
+}
+
+/* Estilos para la sección de inicio "Deporte y Tecnología" */
+#inicio-tecnologia {
+    background: url('imagenes/fondo.jpg') no-repeat center center/cover;
+    border-radius: 15px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+#inicio-tecnologia .overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 60px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#inicio-tecnologia h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#inicio-tecnologia .buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+#inicio-tecnologia .btn {
+    padding: 15px 30px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#inicio-tecnologia .btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Suave desplazamiento */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Sección de Tecnología en el Deporte con Imagen de Fondo */
+.tecnologia-en-el-deporte {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+    border-radius: 15px;
+    background: url('imagenes/tecnologiadeportes.jpg') no-repeat center center/cover;
+}
+
+.tecnologia-en-el-deporte .overlay {
+    /*position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;*/
+
+    background: rgba(0, 0, 0, 0.6);
+    padding: 60px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.tecnologia-en-el-deporte .container {
+    position: relative;
+    z-index: 1;
+}
+
+.tecnologia-en-el-deporte h2 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tecnologia-en-el-deporte p {
+    font-size: 1.4em;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Contenedor principal */
+.contenedor-principal {
+    padding: 50px 30px;
+    background-color: #e9ecef;
+    font-family: Arial, sans-serif;
+}
+
+/* Secciones de contenido */
+.categoria {
+    background-color: #ffffff;
+    font-size: 1.1em;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.categoria:hover {
+    transform: translateY(-5px);
+}
+
+.categoria h2 {
+    color: #0056b3;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 5px;
+}
+
+.categoria p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.video-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.video-item {
+    flex: 1 1 45%; /* Ajusta cada contenedor de video y descripción al 45% */
+    max-width: 560px; /* Define el ancho máximo para que no exceda el tamaño del video */
+    text-align: center;
+}
+
+.video-item iframe {
+    width: 100%; /* Asegura que el video ocupe todo el ancho del contenedor */
+    height: auto;
+}
+
+
+.video-caption {
+    font-size: 0,9em;
+    color: #f8f7f7;
+    margin-top: 10px;
+}
+
+
+/* Convertidor ASCII */
+.ascii-converter {
+    padding: 30px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.ascii-converter h2 {
+    font-size: 1.4em;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.ascii-converter input {
+    font-size: 1.1em;
+    padding: 12px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 50%;
+    max-width: 400px;
+}
+
+.ascii-converter .btn {
+    font-size: 1em;
+    padding: 10px 25px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.ascii-converter .btn:hover {
+    background-color: #004494;
+}
+
+#asciiResult {
+    margin-top: 20px;
+    font-size: 1.1em;
+    color: #333;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px 0;
+    background-color: #f1f1f1;
+    color: #555;
+    border-top: 1px solid #ddd;
+}
+
+
+
+
+

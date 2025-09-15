@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prueba de Fútbol</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #f9f9f9, #e6ffe6);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #006400;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    .quiz-container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: white;
+      border-radius: 12px;
+      padding: 2em;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .quiz-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 2em;
+    }
+
+    .question {
+      margin-bottom: 2em;
+    }
+
+    .question h3 {
+      margin-bottom: 0.5em;
+    }
+
+    .option {
+      background-color: #e0ffe0;
+      border: 2px solid transparent;
+      padding: 10px 15px;
+      margin: 5px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      background-color: #c0f7c0;
+    }
+
+    .option.selected {
+      border-color: #28a745;
+      background-color: #c0f7c0;
+    }
+
+    .btn-submit {
+      background-color: #28a745;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+
+    .btn-submit:hover {
+      background-color: #1e7e34;
+    }
+
+    .results {
+      margin-top: 2em;
+      font-weight: bold;
+    }
+
+    .incorrect {
+      color: red;
+    }
+
+    .correct {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Prueba de Fútbol ⚽</h1>
+  </header>
+
+  <div class="quiz-container">
+    <img src="https://estaticos-cdn.prensaiberica.es/clip/51454854-0935-4652-9dd5-20ae17810dcb_16-9-discover-aspect-ratio_default_1212177.jpg" alt="fútbol" class="quiz-image">
+
+
+    <div id="quiz"></div>
+
+    <button class="btn-submit" onclick="submitQuiz()">Enviar respuestas</button>
+
+    <div id="results" class="results"></div>
+  </div>
+
+  <script>
+    const questions = [
+      // 5 generales
+      { q: "¿Cuántos jugadores conforman un equipo de fútbol en el campo?", a: ["9", "10", "11", "12"], correct: "11" },
+      { q: "¿Qué país ganó el Mundial de 2022?", a: ["Francia", "Argentina", "Brasil", "Alemania"], correct: "Argentina" },
+      { q: "¿Cuál es la duración de un partido profesional?", a: ["60 min", "75 min", "90 min", "100 min"], correct: "90 min" },
+      { q: "¿Cómo se llama el máximo torneo de clubes en Europa?", a: ["Europa League", "Champions League", "Copa UEFA", "Eurocopa"], correct: "Champions League" },
+      { q: "¿Qué jugador es apodado 'La Pulga'?", a: ["Cristiano Ronaldo", "Mbappé", "Messi", "Neymar"], correct: "Messi" },
+
+      // 15 reglamento
+      { q: "¿Qué señal indica el árbitro para conceder un penalti?", a: ["Levanta ambos brazos", "Señala el punto penal", "Muestra tarjeta amarilla", "Silba dos veces"], correct: "Señala el punto penal" },
+      { q: "¿Cuántos cambios puede hacer un equipo en partidos oficiales FIFA?", a: ["3", "4", "5", "6"], correct: "5" },
+      { q: "¿Qué sucede si un jugador toca el balón con la mano de forma intencional?", a: ["Se repite la jugada", "Se concede tiro libre", "Es falta", "Es penalti o tiro libre"], correct: "Es penalti o tiro libre" },
+      { q: "¿Qué tarjeta implica expulsión directa?", a: ["Amarilla", "Roja", "Azul", "Ninguna"], correct: "Roja" },
+      { q: "¿Cuál es la altura reglamentaria de una portería?", a: ["2.44 m", "3 m", "2.10 m", "2.50 m"], correct: "2.44 m" },
+      { q: "¿Cuántos minutos se añaden normalmente en un partido?", a: ["3-4", "5-6", "7-8", "Depende del árbitro"], correct: "Depende del árbitro" },
+      { q: "¿Qué es un fuera de juego?", a: ["Gol con rebote", "Estar más cerca del arco rival que el balón y el penúltimo defensor", "Tocar el balón con la mano", "Simular falta"], correct: "Estar más cerca del arco rival que el balón y el penúltimo defensor" },
+      { q: "¿Cuánto mide un campo profesional?", a: ["100-110m", "90-100m", "100-120m", "90-120m"], correct: "100-110m" },
+      { q: "¿Qué acción sanciona una tarjeta amarilla?", a: ["Gol", "Celebración", "Conducta antideportiva", "Entrar tarde"], correct: "Conducta antideportiva" },
+      { q: "¿Qué pasa si el arquero sale del área y toca el balón con la mano?", a: ["Nada", "Falta y tarjeta", "Gol para el rival", "Saque de banda"], correct: "Falta y tarjeta" },
+      { q: "¿Quién es el único que puede tocar el balón con la mano dentro del área?", a: ["Cualquier jugador", "Defensa central", "Arquero", "Capitán"], correct: "Arquero" },
+      { q: "¿Qué ocurre si un equipo tiene menos de 7 jugadores en campo?", a: ["Se continúa", "El árbitro suspende el juego", "Se agregan minutos", "El otro equipo gana"], correct: "El árbitro suspende el juego" },
+      { q: "¿Cómo se reinicia el juego después de un gol?", a: ["Tiro de esquina", "Saque de banda", "Saque desde el medio", "Tiro libre"], correct: "Saque desde el medio" },
+      { q: "¿Cuál es el color de la tarjeta que advierte a un jugador?", a: ["Roja", "Verde", "Amarilla", "Azul"], correct: "Amarilla" },
+      { q: "¿Qué es una falta técnica?", a: ["No estar en uniforme", "Salir del campo sin permiso", "Entrar al área sin balón", "Simular una falta"], correct: "Salir del campo sin permiso" }
+    ];
+
+    const quizDiv = document.getElementById("quiz");
+    const userAnswers = Array(questions.length).fill(null);
+
+    questions.forEach((q, i) => {
+      const qDiv = document.createElement("div");
+      qDiv.className = "question";
+      qDiv.innerHTML = `<h3>${i + 1}. ${q.q}</h3>`;
+      q.a.forEach(option => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.textContent = option;
+        btn.addEventListener("click", () => {
+          qDiv.querySelectorAll(".option").forEach(opt => opt.classList.remove("selected"));
+          btn.classList.add("selected");
+          userAnswers[i] = option;
+        });
+        qDiv.appendChild(btn);
+      });
+      quizDiv.appendChild(qDiv);
+    });
+
+    function submitQuiz() {
+      let correct = 0;
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "";
+
+      questions.forEach((q, i) => {
+        if (userAnswers[i] === q.correct) {
+          correct++;
+        } else {
+          resultsDiv.innerHTML += `<p class="incorrect">❌ Pregunta ${i + 1}: Respuesta incorrecta. Correcta: <strong>${q.correct}</strong></p>`;
+        }
+      });
+
+      resultsDiv.innerHTML = `<h3 class="correct">✔️ Obtuviste ${correct} de ${questions.length} correctas</h3>` + resultsDiv.innerHTML;
+    }
+  </script>
+
+</body>
+</html>

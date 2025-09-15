@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prueba de Baloncesto</title>
+  <link rel="stylesheet" href="baloncesto.css" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #f9f9f9, #fff2e6);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #cc6600;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    .quiz-container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: white;
+      border-radius: 12px;
+      padding: 2em;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .quiz-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 2em;
+    }
+
+    .question {
+      margin-bottom: 2em;
+    }
+
+    .question h3 {
+      margin-bottom: 0.5em;
+    }
+
+    .option {
+      background-color: #fff0e0;
+      border: 2px solid transparent;
+      padding: 10px 15px;
+      margin: 5px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      background-color: #ffe0cc;
+    }
+
+    .option.selected {
+      border-color: #cc6600;
+      background-color: #ffe0cc;
+    }
+
+    .btn-submit {
+      background-color: #cc6600;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+
+    .btn-submit:hover {
+      background-color: #994d00;
+    }
+
+    .results {
+      margin-top: 2em;
+      font-weight: bold;
+    }
+
+    .incorrect {
+      color: red;
+    }
+
+    .correct {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Prueba de Baloncesto 🏀</h1>
+  </header>
+
+  <div class="quiz-container">
+    <img src="http://sialdeporte.com/wp-content/uploads/2018/02/como-se-juega-el-basquetbol-1-1024x640.jpg" alt="Baloncesto" class="quiz-image">
+
+    <div id="quiz"></div>
+
+    <button class="btn-submit" onclick="submitQuiz()">Enviar respuestas</button>
+
+    <div id="results" class="results"></div>
+  </div>
+
+  <script>
+    const questions = [
+      // 5 generales
+      { q: "¿Cuántos jugadores hay en cancha por equipo?", a: ["4", "5", "6", "7"], correct: "5" },
+      { q: "¿Cuánto tiempo dura un partido de baloncesto profesional?", a: ["2 cuartos de 20 min", "4 cuartos de 10 min", "4 cuartos de 12 min", "3 tiempos de 15 min"], correct: "4 cuartos de 12 min" },
+      { q: "¿Qué significa una asistencia en baloncesto?", a: ["Un pase para una canasta", "Un rebote", "Una falta cometida", "Una tapada"], correct: "Un pase para una canasta" },
+      { q: "¿Cuántos puntos vale un triple?", a: ["1", "2", "3", "4"], correct: "3" },
+      { q: "¿Qué es un rebote?", a: ["Cuando la pelota entra", "Pase al aire", "Recuperar el balón tras un tiro fallido", "Cuando el jugador corre con el balón"], correct: "Recuperar el balón tras un tiro fallido" },
+
+      // 15 de reglamento
+      { q: "¿Cuánto mide la cancha de baloncesto profesional (FIBA)?", a: ["26x14 m", "28x15 m", "30x17 m", "25x13 m"], correct: "28x15 m" },
+      { q: "¿Cuánto tiempo tiene un equipo para lanzar al aro?", a: ["10 segundos", "24 segundos", "30 segundos", "12 segundos"], correct: "24 segundos" },
+      { q: "¿Cuánto vale una canasta dentro del área?", a: ["1", "2", "3", "4"], correct: "2" },
+      { q: "¿Qué sucede si un jugador hace 5 faltas personales?", a: ["Se va a la banca", "Expulsado", "No puede lanzar triples", "Pierde puntos"], correct: "Expulsado" },
+      { q: "¿Qué es un 'doble dribble'?", a: ["Pasar dos veces el balón", "Rebotar con ambas manos", "Botar, detenerse y volver a botar", "Hacer dos puntos"], correct: "Botar, detenerse y volver a botar" },
+      { q: "¿Qué zona se encuentra debajo del aro?", a: ["Zona libre", "Zona de ataque", "Pintura", "Trampa"], correct: "Pintura" },
+      { q: "¿Qué tipo de defensa impide el paso al aro?", a: ["Presión total", "Zona", "Individual", "Bloqueo"], correct: "Bloqueo" },
+      { q: "¿Qué es un 'triple-doble'?", a: ["Anotar 30 pts", "Hacer 3 triples seguidos", "10+ puntos, rebotes y asistencias", "10+ faltas"], correct: "10+ puntos, rebotes y asistencias" },
+      { q: "¿Cuántos árbitros hay en un juego profesional?", a: ["1", "2", "3", "4"], correct: "3" },
+      { q: "¿Qué significa una 'técnica'?", a: ["Error de técnica de tiro", "Falta de respeto o conducta antideportiva", "Error del árbitro", "Lanzamiento rápido"], correct: "Falta de respeto o conducta antideportiva" },
+      { q: "¿Qué es el 'campo atrás'?", a: ["Retroceder en ataque", "Cruzar la media cancha y regresar", "Pasar el balón al pivote", "Saltar en defensa"], correct: "Cruzar la media cancha y regresar" },
+      { q: "¿Cuántos segundos puede estar un jugador ofensivo en la pintura?", a: ["2", "3", "5", "6"], correct: "3" },
+      { q: "¿Qué ocurre con una violación de 8 segundos?", a: ["Pérdida de balón", "Falta técnica", "Canasta anulada", "Penalización leve"], correct: "Pérdida de balón" },
+      { q: "¿Qué rol juega el base armador?", a: ["Anotar triples", "Defender", "Rebotear", "Organizar el juego"], correct: "Organizar el juego" },
+      { q: "¿Cuál es la altura del aro reglamentario?", a: ["2.90 m", "3.05 m", "3.25 m", "3.00 m"], correct: "3.05 m" }
+    ];
+
+    const quizDiv = document.getElementById("quiz");
+    const userAnswers = Array(questions.length).fill(null);
+
+    questions.forEach((q, i) => {
+      const qDiv = document.createElement("div");
+      qDiv.className = "question";
+      qDiv.innerHTML = `<h3>${i + 1}. ${q.q}</h3>`;
+      q.a.forEach(option => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.textContent = option;
+        btn.addEventListener("click", () => {
+          qDiv.querySelectorAll(".option").forEach(opt => opt.classList.remove("selected"));
+          btn.classList.add("selected");
+          userAnswers[i] = option;
+        });
+        qDiv.appendChild(btn);
+      });
+      quizDiv.appendChild(qDiv);
+    });
+
+    function submitQuiz() {
+      let correct = 0;
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "";
+
+      questions.forEach((q, i) => {
+        if (userAnswers[i] === q.correct) {
+          correct++;
+        } else {
+          resultsDiv.innerHTML += `<p class="incorrect">❌ Pregunta ${i + 1}: Respuesta incorrecta. Correcta: <strong>${q.correct}</strong></p>`;
+        }
+      });
+
+      resultsDiv.innerHTML = `<h3 class="correct">✔️ Obtuviste ${correct} de ${questions.length} correctas</h3>` + resultsDiv.innerHTML;
+    }
+  </script>
+
+</body>
+</html>

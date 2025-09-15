@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prueba de Taekwondo</title>
+  <link rel="stylesheet" href="taekwondo.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #f9f9f9, #e6f0ff);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #004080;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    .quiz-container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: white;
+      border-radius: 12px;
+      padding: 2em;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .quiz-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 2em;
+    }
+
+    .question {
+      margin-bottom: 2em;
+    }
+
+    .question h3 {
+      margin-bottom: 0.5em;
+    }
+
+    .option {
+      background-color: #e0f0ff;
+      border: 2px solid transparent;
+      padding: 10px 15px;
+      margin: 5px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      background-color: #cce5ff;
+    }
+
+    .option.selected {
+      border-color: #007bff;
+      background-color: #cce5ff;
+    }
+
+    .btn-submit {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+
+    .btn-submit:hover {
+      background-color: #0056b3;
+    }
+
+    .results {
+      margin-top: 2em;
+      font-weight: bold;
+    }
+
+    .incorrect {
+      color: red;
+    }
+
+    .correct {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Prueba de Taekwondo 🥋</h1>
+  </header>
+
+  <div class="quiz-container">
+    <img src="imagenes/taekwondo.jfif" alt="Taekwondo" class="quiz-image">
+
+    <div id="quiz"></div>
+
+    <button class="btn-submit" onclick="submitQuiz()">Enviar respuestas</button>
+
+    <div id="results" class="results"></div>
+  </div>
+
+  <script>
+    const questions = [
+      // 5 generales
+      { q: "¿Dónde se originó el Taekwondo?", a: ["China", "Corea", "Japón", "Tailandia"], correct: "Corea" },
+      { q: "¿Cuál es el enfoque principal del Taekwondo?", a: ["Grappling", "Golpes de puño", "Patadas", "Lanzamientos"], correct: "Patadas" },
+      { q: "¿Taekwondo es un deporte olímpico desde qué año?", a: ["1992", "2000", "2008", "2016"], correct: "2000" },
+      { q: "¿Cuántos asaltos tiene un combate?", a: ["1", "2", "3", "5"], correct: "3" },
+      { q: "¿Qué fomenta el Taekwondo en sus practicantes?", a: ["Fuerza física", "Agresividad", "Autocontrol", "Relajación"], correct: "Autocontrol" },
+
+      // 15 del reglamento
+      { q: "¿Qué tamaño tiene el área de combate?", a: ["6x6 m", "7x7 m", "8x8 m", "10x10 m"], correct: "8x8 m" },
+      { q: "¿Qué parte del cuerpo NO es válida para atacar?", a: ["Cabeza", "Torso", "Piernas", "Ninguna"], correct: "Piernas" },
+      { q: "¿Cuánto vale una patada giratoria al torso?", a: ["2", "3", "4", "5"], correct: "4" },
+      { q: "¿Cuántos puntos da un golpe de puño al torso?", a: ["1", "2", "3", "4"], correct: "1" },
+      { q: "¿Qué equipo es obligatorio?", a: ["Casco y protector bucal", "Cinturón rojo", "Zapatos deportivos", "Ropa blanca"], correct: "Casco y protector bucal" },
+      { q: "¿Qué color de cinturón es el más avanzado?", a: ["Amarillo", "Rojo", "Verde", "Negro"], correct: "Negro" },
+      { q: "¿Qué sucede si se sale del área?", a: ["Nada", "Punto para el oponente", "Penalización", "Advertencia"], correct: "Penalización" },
+      { q: "¿Cuál es la duración de cada asalto?", a: ["1 min", "2 min", "3 min", "5 min"], correct: "2 min" },
+      { q: "¿Qué se requiere antes de iniciar combate?", a: ["Saludo", "Flexión", "Desplante", "Chillido"], correct: "Saludo" },
+      { q: "¿Quién dirige el combate?", a: ["Juez central", "Coach", "Público", "Capitán"], correct: "Juez central" },
+      { q: "¿Qué tipo de golpe da más puntos?", a: ["Puño al torso", "Patada al torso", "Patada a la cabeza", "Codazo"], correct: "Patada a la cabeza" },
+      { q: "¿Qué valor tiene una patada directa al torso?", a: ["1", "2", "3", "4"], correct: "2" },
+      { q: "¿Cuál es una falta grave?", a: ["Gritar", "Evitar el combate", "Tocar el suelo", "No saludar"], correct: "Evitar el combate" },
+      { q: "¿Qué idioma se usa oficialmente en competencias?", a: ["Coreano", "Inglés", "Español", "Francés"], correct: "Coreano" },
+      { q: "¿Qué representa el cinturón negro?", a: ["Novato", "Avanzado", "Experto", "Principiante"], correct: "Experto" }
+    ];
+
+    const quizDiv = document.getElementById("quiz");
+
+    const userAnswers = Array(questions.length).fill(null);
+
+    questions.forEach((q, i) => {
+      const qDiv = document.createElement("div");
+      qDiv.className = "question";
+      qDiv.innerHTML = `<h3>${i + 1}. ${q.q}</h3>`;
+      q.a.forEach(option => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.textContent = option;
+        btn.addEventListener("click", () => {
+          // Limpiar selección previa
+          qDiv.querySelectorAll(".option").forEach(opt => opt.classList.remove("selected"));
+          btn.classList.add("selected");
+          userAnswers[i] = option;
+        });
+        qDiv.appendChild(btn);
+      });
+      quizDiv.appendChild(qDiv);
+    });
+
+    function submitQuiz() {
+      let correct = 0;
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "";
+
+      questions.forEach((q, i) => {
+        if (userAnswers[i] === q.correct) {
+          correct++;
+        } else {
+          resultsDiv.innerHTML += `<p class="incorrect">❌ Pregunta ${i + 1}: Respuesta incorrecta. Correcta: <strong>${q.correct}</strong></p>`;
+        }
+      });
+
+      resultsDiv.innerHTML = `<h3 class="correct">✔️ Obtuviste ${correct} de ${questions.length} correctas</h3>` + resultsDiv.innerHTML;
+    }
+  </script>
+
+</body>
+</html>

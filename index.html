@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORT RULES CENTER</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="icon" href="imagenes/Logo.png" type="image/x-icon">
+    <style>
+        .reglamento {
+            background: url('imagenes/reglamentoFondo.png') no-repeat center center/cover;
+        }  
+    </style>
+
+  <style>
+    /* Ajustes básicos para el modal */
+    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; }
+    .modal.show { display: flex; }
+    .modal-content { background:#fff; padding:2rem; border-radius:8px; width:90%; max-width:400px; position:relative; }
+    .close { position:absolute; top:0.5rem; right:0.75rem; font-size:1.5rem; cursor:pointer; }
+    .password-wrapper { position:relative; }
+    .toggle-password { position:absolute; right:0.5rem; top:50%; transform:translateY(-50%); cursor:pointer; }
+    .form-switch { color:#007BFF; cursor:pointer; margin-top:1rem; text-align:center; }
+    #message { margin-top:1rem; color:#c00; text-align:center; }
+  </style>
+</head>
+<body>
+  <!-- Botones en tu cabecera -->
+  <header class="top-bar">
+    <button onclick="openModal('login')" class="btn-header">Iniciar sesión</button>
+    <button onclick="openModal('register')" class="btn-header">Registrarse</button>
+  </header>
+
+  <!-- Modal -->
+  <div id="modalLogin" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2 id="modalTitle">Bienvenido a Sport Rules Center</h2>
+      <p id="modalDesc">Inicia sesión o regístrate para una mejor experiencia.</p>
+
+      <!-- Mensaje AJAX -->
+      <div id="message"></div>
+
+      <!-- Login Form -->
+      <form id="loginForm" style="display:none;">
+        <input type="email" name="correo" placeholder="Correo electrónico" required>
+        <div class="password-wrapper">
+          <input type="password" id="loginPass" name="contrasena" placeholder="Contraseña" required>
+          <span class="toggle-password" onclick="togglePassword('loginPass', this)">👁️</span>
+        </div>
+        <button type="submit" class="btn">Iniciar Sesión</button>
+        <p class="form-switch" onclick="switchForm('register')">¿No tienes cuenta? Regístrate</p>
+      </form>
+
+      <!-- Registro Form -->
+      <form id="registerForm" style="display:none;">
+        <input type="text" name="nombre" placeholder="Nombre completo" required>
+        <input type="email" name="correo" placeholder="Correo electrónico" required>
+        <div class="password-wrapper">
+          <input type="password" id="registerPass" name="contrasena" placeholder="Crear contraseña" required>
+          <span class="toggle-password" onclick="togglePassword('registerPass', this)">👁️</span>
+        </div>
+        <button type="submit" class="btn">Registrarse</button>
+        <p class="form-switch" onclick="switchForm('login')">¿Ya tienes cuenta? Inicia sesión</p>
+      </form>
+    </div>
+  </div>
+
+</head>
+<body>
+    <div class="animsition-overlay">
+       
+       
+        <!-- Nueva sección de Encabezado Principal -->
+        <header class="hero">
+            <div class="hero-content">
+                <h1>SPORT RULES CENTER</h1>
+                <p>Descubre los mejores deportes y aprende sobre ellos</p>
+                <a href="#reglamento" class="btn">Explorar</a>   
+            </div>
+        </header>
+
+        <section id="reglamento" class="reglamento">
+            <div class="container">
+                <h2>Reglamento Deportivo</h2>
+                <p>El reglamento deportivo asegura que todos los eventos se desarrollen con integridad, seguridad y equidad para todos los participantes. Incluye reglas específicas para cada deporte, así como directrices generales de conducta para atletas, entrenadores y árbitros.</p>
+                <a href="https://www.lifeder.com/reglamento-deportivo/" class="btn">Leer Más</a>
+            </div>
+        </section>
+
+        <!-- Tecnologia y Deporte -->
+        <section id="tecnologia-deporte" class="tecnologia-deporte">
+            <video autoplay muted loop class="video-background">
+                <source src="videos/tecnologiaDeporte.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+            <div class="container">
+                <h2>Tecnología y Deporte</h2>
+                <p>¿Te gusta la tecnología y quieres saber cómo se aplica en los deportes? Descubre cómo la innovación tecnológica está transformando el mundo del deporte, desde el entrenamiento hasta la competición.</p>
+                <a href="deporteytecnologia/tecnologia.html" class="btn">Explorar Más</a>
+            </div>
+        </section>
+
+         <!-- Sección de Grupos Deportivos -->
+          <section class="categoria">
+            <section class="deportes-por-grupo">
+                <section class="group-section">
+                    <h3>Deportes por Grupo</h3>
+                <div class="group-navigation">
+                    <a href="#deportes-acuaticos" class="group-btn">Deportes Acuáticos</a>
+                    <a href="#deportes-atletismo-combate" class="group-btn">Atletismo y Combate</a>
+                    <a href="#deportes-gimnasia" class="group-btn">Deportes de Gimnasia</a>
+                    <a href="#deportes-equipo" class="group-btn">Deportes de Equipo</a>
+                    <a href="#deportes-raqueta-pelota" class="group-btn">Raqueta y Pelota</a>
+                    <a href="#deportes-ciclismo-patinaje" class="group-btn">Ciclismo y Patinaje</a>
+                    <a href="#deportes-tiro" class="group-btn">Deportes de Tiro</a>
+                    <a href="#deportes-habilidad-precision" class="group-btn">Habilidad y Precisión</a>
+                    <a href="#deportes-resistencia-multidisciplina" class="group-btn">Resistencia y Multidisciplina</a>
+                </div>
+                </section>
+                
+            </section>
+          </section>   
+                
+            <!-- Deportes Acuáticos -->
+             <section class="categoria">
+                <div class="grid">
+                    <div class="col_12">
+                        <section id="deportes-acuaticos" class="group-section">
+                            <h3>Deportes Acuáticos</h3>
+                        <div class="group">
+                            <!-- Natación -->
+                            <div class="deporte-card">
+                                <div class="deporte-img">
+                                    <img src="imagenes/natacion.jpg" alt="Natación">
+                                </div>
+                                <div class="deporte-info">
+                                    <h4>Natación</h4>
+                                    <p>La natación es uno de los deportes más completos...</p>
+                                    <a href="natacion/natacion.html" class="btn">Ver más</a>
+                                </div>
+                            </div>
+    
+                        <!-- Piragüismo -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/piraguismo.jpg" alt="Piragüismo">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Piragüismo</h4>
+                                <p>El piragüismo en eslalon y esprint son modalidades que requieren destreza y velocidad en el agua.</p>
+                                <a href="Piragüismo/Piragüismo.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        
+                        <!-- Waterpolo -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/waterpolo.jpg" alt="Waterpolo">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Waterpolo</h4>
+                                <p>El waterpolo es un deporte de equipo jugado en el agua, donde se intenta marcar goles en la portería contraria.</p>
+                                <a href="waterpolo/waterpolo.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Saltos -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/saltos.jpg" alt="Saltos">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Saltos</h4>
+                                <p>Los saltos son una disciplina en la que se realizan acrobacias desde plataformas o trampolines.</p>
+                                <a href="saltos/saltos.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Remo -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/remo.jpg" alt="Remo">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Remo</h4>
+                                <p>El remo es un deporte de equipo que combina fuerza, resistencia y sincronización.</p>
+                                <a href="remo/remo.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Surf -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/surf.jpg" alt="Surf">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Surf</h4>
+                                <p>El surf es un deporte de deslizamiento sobre las olas con una tabla, combinando técnica y equilibrio.</p>
+                                <a href="surf/surf.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Vela -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/vela.jpg" alt="Vela">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Vela</h4>
+                                <p>La vela es una competencia en la que los deportistas navegan en embarcaciones controladas por el viento.</p>
+                                <a href="vela/vela.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+             </section>
+            
+
+            <!-- Grupo 2: Deportes de Atletismo y Combate -->
+             <section class="categoria">
+                <div class="grid">
+                    <div class="col_12">
+                        <section id="deportes-atletismo-combate" class="group-section">
+                            <h3>Deportes de Atletismo y Combate</h3>
+                        <div class="group">
+                        <!-- Atletismo -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/atletismo.jpg" alt="Atletismo">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Atletismo</h4>
+                                <p>El atletismo abarca múltiples disciplinas, desde carreras de velocidad hasta lanzamientos y saltos.</p>
+                                <a href="atletismo/atletismo.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Lucha -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/lucha.jpg" alt="Lucha">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Lucha</h4>
+                                <p>La lucha es un deporte de combate en el que los competidores buscan derrotar al oponente mediante técnicas de agarre.</p>
+                                <a href="lucha/lucha.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Judo -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/judo.jpg" alt="Judo">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Judo</h4>
+                                <p>El judo es un arte marcial de origen japonés basado en lanzamientos y técnicas de control.</p>
+                                <a href="judo/judo.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Taekwondo -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/taekwondo.jpg" alt="Taekwondo">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Taekwondo</h4>
+                                <p>El taekwondo es un arte marcial que destaca por sus técnicas de pateo, combinando agilidad y potencia.</p>
+                                <a href="taekwondo/taekwondo.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+             </section>
+            
+
+            <!-- Grupo 3: Deportes de Gimnasia -->
+             <section class="categoria">
+                <div class="grid">
+                    <div class="col_12">
+                        <section id="deportes-gimnasia" class="group-section">
+                            <h3>Deportes de Gimnasia</h3>
+                        <div class="group">
+                        <!-- Gimnasia Artística -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/gimnasia_artistica.jpg" alt="Gimnasia Artística">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Gimnasia Artística</h4>
+                                <p>La gimnasia artística incluye ejercicios en aparatos como el salto, las barras y la barra fija.</p>
+                                <a href="gimnasia artistica/gimnasia_artistica.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Gimnasia en Trampolín -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/gimnasia_trampolin.jpg" alt="Gimnasia en Trampolín">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Gimnasia en Trampolín</h4>
+                                <p>La gimnasia en trampolín se enfoca en saltos acrobáticos sobre un trampolín.</p>
+                                <a href="gimnasia en trampolin/gimnasia_trampolin.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Gimnasia Rítmica -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/gimnasia_ritmica.jpg" alt="Gimnasia Rítmica">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Gimnasia Rítmica</h4>
+                                <p>La gimnasia rítmica combina elementos de danza y gimnasia, utilizando aparatos como cintas y pelotas.</p>
+                                <a href="gimnasia ritmica/gimnasia_ritmica.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+             </section>
+            
+
+            <!-- Grupo 4: Deportes de Equipo -->
+             <section class="categoria">
+                <div class="grid">
+                    <div class="col_12">
+                        <section id="deportes-equipo" class="group-section">
+                            <h3>Deportes de Equipo</h3>
+                        <div class="group">
+                        <!-- Baloncesto -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/baloncesto.jpg" alt="Baloncesto">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Baloncesto</h4>
+                                <p>El baloncesto es un deporte de equipo en el que se busca encestar el balón en la canasta contraria.</p>
+                                <a href="baloncesto/baloncesto.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Balonmano -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/balonmano.jpg" alt="Balonmano">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Balonmano</h4>
+                                <p>El balonmano es un deporte de equipo donde los jugadores pasan y lanzan un balón para marcar goles.</p>
+                                <a href="balonmano/balonmano.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Fútbol -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/futbol.jpg" alt="Fútbol">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Fútbol</h4>
+                                <p>El fútbol es uno de los deportes más populares, donde dos equipos buscan marcar goles en la portería contraria.</p>
+                                <a href="futbol/futbol.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Hockey sobre Césped -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/hockey.jpg" alt="Hockey sobre Césped">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Hockey sobre Césped</h4>
+                                <p>El hockey sobre césped se juega en un campo de hierba y combina técnica y estrategia.</p>
+                                <a href="Hockey sobre Cesped/Hockey sobre Cesped.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Rugby 7 -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/Rugby7.jpg" alt="Rugby 7">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Rugby 7</h4>
+                                <p>El rugby 7 es una variante del rugby tradicional que se juega con siete jugadores por equipo.</p>
+                                <a href="Rugby 7/Rugby 7.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Flag Football -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/Flag_football.webp" alt="Flag Football">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Flag Football</h4>
+                                <p>El flag football es una variante del fútbol americano donde no hay contacto físico.</p>
+                                <a href="flag football/flag football.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Lacrosse -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/lacrosse.jpg" alt="Lacrosse">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Lacrosse</h4>
+                                <p>El lacrosse es un deporte de equipo que utiliza un palo con red para atrapar y pasar una pelota.</p>
+                                <a href="lacrosse/lacrosse.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Cricket -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/criquet.webp" alt="Críquet">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Cricket</h4>
+                                <p>El Cricket es un deporte de bate y pelota que se juega entre dos equipos de once jugadores.</p>
+                                <a href="Criquet/Criquet.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+    
+                        <!-- Voleibol -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/voleibol.jpg" alt="Voleibol">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Voleibol</h4>
+                                <p>El voleibol es un deporte de equipo donde los jugadores intentan hacer que el balón toque el suelo del equipo contrario.</p>
+                                <a href="voleibol/voleibol.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+             </section>
+            
+        
+            <!-- Grupo 5: Deportes de Raqueta y Pelota -->
+             <section class="categoria">
+                <div class="grid">
+                    <div class="col_12">
+                        <section id="deportes-raqueta-pelota" class="group-section">
+                            <h3>Deportes de Raqueta y Pelota</h3>
+                        <div class="group">
+                        <!-- Tenis -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/tenis.jpg" alt="Tenis">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Tenis</h4>
+                                <p>El tenis es un deporte individual o de pareja donde los jugadores golpean una pelota con raquetas.</p>
+                                <a href="tenis de campo/tenis_campo.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Tenis de Mesa -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/tenis_mesa.jpg" alt="Tenis de Mesa">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Tenis de Mesa</h4>
+                                <p>El tenis de mesa, o ping-pong, se juega en una mesa dividida por una red, siendo rápido y estratégico.</p>
+                                <a href="tenis de mesa/tenis_mesa.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Bádminton -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/badminton.jpg" alt="Bádminton">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Bádminton</h4>
+                                <p>El bádminton es un deporte de raqueta donde se golpea un volante con el objetivo de hacer puntos.</p>
+                                <a href="badminton/badminton.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Squash -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/squash.webp" alt="Squash">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Squash</h4>
+                                <p>El squash se juega en un recinto cerrado donde los jugadores golpean una pelota contra la pared.</p>
+                                <a href="Squash/Squash.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Golf -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/golf.jpg" alt="Golf">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Golf</h4>
+                                <p>El golf es un deporte que consiste en golpear una bola con un palo hacia un hoyo en el menor número de golpes.</p>
+                                <a href="Golf/Golf.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Béisbol -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/beisbol.jpg" alt="Béisbol">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Béisbol</h4>
+                                <p>El béisbol es un deporte de equipo donde los jugadores batean una pelota y corren por bases para anotar carreras.</p>
+                                <a href="Béisbol/Béisbol.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+             </section>
+            
+        
+            <!-- Grupo 6: Deportes de Ciclismo y Patinaje -->
+             <section class="categoria">
+                <div class="grid">
+                    <div class="col_12">
+                        <section id="deportes-ciclismo-patinaje" class="group-section">
+                            <h3>Deportes de Ciclismo y Patinaje</h3>
+                        <div class="group">
+                        <!-- Ciclismo -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/ciclismo.jpg" alt="Ciclismo">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Ciclismo</h4>
+                                <p>El ciclismo incluye diferentes disciplinas, desde carreras de ruta hasta competiciones en pista.</p>
+                                <a href="ciclismo/ciclismo.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Skateboarding -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/skateboarding.jpg" alt="Skateboarding">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Skateboarding</h4>
+                                <p>El skateboarding es un deporte que se practica sobre una tabla con ruedas, con acrobacias y trucos.</p>
+                                <a href="Skateboarding/Skateboarding.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+             </section>
+            
+        
+            <!-- Grupo 7: Deportes de Tiro -->
+             <section class="categoria"> 
+                <div class="grid">
+                    <div class="col_12">
+                        <section id="deportes-tiro" class="group-section">
+                            <h3>Deportes de Tiro</h3>
+                        <div class="group">
+                        <!-- Tiro -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/tiro.jpg" alt="Tiro">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Tiro</h4>
+                                <p>El tiro es un deporte que consiste en disparar a un objetivo con un arma de fuego o arco.</p>
+                                <a href="tiro/tiro.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Tiro con Arco -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/tiro_con_arco.jpg" alt="Tiro con Arco">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Tiro con Arco</h4>
+                                <p>El tiro con arco es un deporte que requiere precisión al disparar flechas a un blanco.</p>
+                                <a href="tiro con arco/tiro con arco.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+             </section>
+            
+        
+            <!-- Grupo 8: Deportes de Habilidad y Precisión -->
+             <section class="categoria">
+                <div class="grid">
+                    <div class="col_12">
+                        <section id="deportes-habilidad-precision" class="group-section">
+                            <h3>Deportes de Habilidad y Precisión</h3>
+                        <div class="group">
+                        <!-- Escalada Deportiva -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/escalada_deportiva.jpg" alt="Escalada Deportiva">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Escalada Deportiva</h4>
+                                <p>La escalada deportiva es un deporte que consiste en escalar paredes o montañas con equipo adecuado.</p>
+                                <a href="Escalada Deportiva/Escalada Deportiva.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Esgrima -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/esgrima.jpg" alt="Esgrima">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Esgrima</h4>
+                                <p>La esgrima es un deporte de combate donde los participantes utilizan espadas para puntuar tocando a su oponente.</p>
+                                <a href="Esgrima/Esgrima.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Halterofilia -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/halterofilia.jpg" alt="Halterofilia">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Halterofilia</h4>
+                                <p>La halterofilia es un deporte que implica levantar pesas en distintas categorías de peso.</p>
+                                <a href="Halterofilia/Halterofilia.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Hípica -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/hipica.jpg" alt="Hípica">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Hípica</h4>
+                                <p>La hípica es un deporte que involucra montar y competir con caballos en diferentes disciplinas.</p>
+                                <a href="Hípica/Hípica.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+            
+                        <!-- Pentatlón Moderno -->
+                        <div class="deporte-card">
+                            <div class="deporte-img">
+                                <img src="imagenes/pentatlon_moderno.jpg" alt="Pentatlón Moderno">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Pentatlón Moderno</h4>
+                                <p>El pentatlón moderno combina esgrima, natación, equitación, carrera y tiro en una sola competición.</p>
+                                <a href="Pentatlón Moderno/Pentatlón Moderno.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+             </section> 
+            
+        
+            <!-- Grupo 9: Deportes de Resistencia y Multidisciplina -->
+             <section class="categoria">
+                <div class="grid">
+                    <div class="col_12">
+                        <section id="deportes-resistencia-multidisciplina" class="group-section">
+                            <h3> Deportes de Resistencia y Multidisciplina</h3>
+                        <div class="group">
+                        <!-- Triatlón -->
+                        <div class="deporte-cards">
+                            <div class="deporte-img">
+                                <img src="imagenes/triatlon.jpg" alt="Triatlón">
+                            </div>
+                            <div class="deporte-info">
+                                <h4>Triatlón</h4>
+                                <p>El triatlón combina natación, ciclismo y carrera en una sola competición, desafiando la resistencia del atleta.</p>
+                                <a href="triatlon/triatlon.html" class="btn">Ver más</a>
+                            </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+             </section>
+            
+        </div>
+
+        <footer>
+            <p> AUTORES </p>
+            <p> Sergio Andrés Quimbayo Suarez </p>
+            <p> Victor Hernando Molina Rodriguez</p>
+            <p> ______________________________________________________________________</p>  
+            <p>&copy; 2025 Regulación de Deportes. Todos los derechos reservados.</p>
+            <p> Universidad de Cundinamarca </p>
+            <p> Facultad de Ingeniería - Ingeniería de Sistemas y Computación </p>
+        </footer>
+
+        <script>
+            document.querySelector('.btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        </script>
+
+
+    <body>
+        <script src="main.js"></script>
+
+        <script>
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('closeModal').addEventListener('click', () => closeModal());
+      document.getElementById('loginForm').addEventListener('submit', submitLogin);
+      document.getElementById('registerForm').addEventListener('submit', submitRegister);
+    });
+
+    // Abrir modal y mostrar el formulario correcto
+    function openModal(mode) {
+      clearMessage();
+      document.getElementById('modalLogin').classList.add('show');
+      switchForm(mode);
+    }
+    function closeModal() {
+      document.getElementById('modalLogin').classList.remove('show');
+    }
+    function switchForm(mode) {
+      const login = document.getElementById('loginForm');
+      const register = document.getElementById('registerForm');
+      const title = document.getElementById('modalTitle');
+      const desc  = document.getElementById('modalDesc');
+
+      if (mode === 'login') {
+        login.style.display = 'block';
+        register.style.display = 'none';
+        title.textContent = 'Iniciar Sesión';
+        desc.textContent  = 'Introduce tus credenciales';
+      } else {
+        login.style.display = 'none';
+        register.style.display = 'block';
+        title.textContent = 'Regístrate';
+        desc.textContent  = 'Crea tu cuenta nueva';
+      }
+    }
+
+    // Toggle visibilidad de contraseña
+    function togglePassword(id, icon) {
+      const input = document.getElementById(id);
+      input.type = input.type === 'password' ? 'text' : 'password';
+      icon.textContent = input.type === 'password' ? '👁️' : '🙈';
+    }
+
+    // Mostrar mensaje de servidor
+    function showMessage(text, success = false) {
+      const msg = document.getElementById('message');
+      msg.style.color = success ? 'green' : '#c00';
+      msg.textContent = text;
+    }
+    function clearMessage() {
+      document.getElementById('message').textContent = '';
+    }
+
+    // Envío AJAX de login
+    async function submitLogin(e) {
+      e.preventDefault();
+      clearMessage();
+      const form = e.target;
+      const data = new FormData(form);
+
+      try {
+        const res = await fetch('login.php', {
+          method: 'POST',
+          body: data
+        });
+        const text = await res.text();
+        // Asumimos que login.php devuelve "Inicio de sesión exitoso. Bienvenido, Nombre"
+        if (/exitoso/i.test(text)) {
+          showMessage(text, true);
+          setTimeout(closeModal, 1500);
+        } else {
+          showMessage(text, false);
+        }
+      } catch (err) {
+        showMessage('Error al conectar con el servidor.');
+      }
+    }
+
+    // Envío AJAX de registro
+    async function submitRegister(e) {
+      e.preventDefault();
+      clearMessage();
+      const form = e.target;
+      const data = new FormData(form);
+
+      try {
+        const res = await fetch('registro.php', {
+          method: 'POST',
+          body: data
+        });
+        const text = await res.text();
+        if (/éxito/i.test(text) || /registrado/i.test(text)) {
+          showMessage(text, true);
+          // Tras un registro exitoso, volvemos al login
+          setTimeout(() => switchForm('login'), 1500);
+        } else {
+          showMessage(text, false);
+        }
+      } catch (err) {
+        showMessage('Error al conectar con el servidor.');
+      }
+    }
+  </script>
+    </body>
+</html>
