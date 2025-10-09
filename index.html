@@ -9,20 +9,19 @@
     <style>
         .reglamento {
             background: url('imagenes/reglamentoFondo.png') no-repeat center center/cover;
-        }  
+        }  
+        /* Estilos del Modal (mantener para referencia) */
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index: 1000; }
+        .modal.show { display: flex; }
+        .modal-content { background:#fff; padding:2rem; border-radius:8px; width:90%; max-width:400px; position:relative; }
+        .close { position:absolute; top:0.5rem; right:0.75rem; font-size:1.5rem; cursor:pointer; }
+        .password-wrapper { position:relative; }
+        .toggle-password { position:absolute; right:0.5rem; top:50%; transform:translateY(-50%); cursor:pointer; }
+        .form-switch { color:#007BFF; cursor:pointer; margin-top:1rem; text-align:center; }
+        #message { margin-top:1rem; color:#c00; text-align:center; }
+        .success { color: green !important; } /* Añadido para mensajes de éxito */
+        .error { color: red !important; }    /* Añadido para mensajes de error */
     </style>
-
-  <style>
-    /* Ajustes básicos para el modal */
-    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; }
-    .modal.show { display: flex; }
-    .modal-content { background:#fff; padding:2rem; border-radius:8px; width:90%; max-width:400px; position:relative; }
-    .close { position:absolute; top:0.5rem; right:0.75rem; font-size:1.5rem; cursor:pointer; }
-    .password-wrapper { position:relative; }
-    .toggle-password { position:absolute; right:0.5rem; top:50%; transform:translateY(-50%); cursor:pointer; }
-    .form-switch { color:#007BFF; cursor:pointer; margin-top:1rem; text-align:center; }
-    #message { margin-top:1rem; color:#c00; text-align:center; }
-  </style>
 </head>
 <body>
   <!-- Botones en tu cabecera -->
@@ -53,59 +52,58 @@
       </form>
 
       <!-- Registro Form -->
-      <form id="registerForm" style="display:none;">
+      <form id="registerForm" style="display:none;" action="registro.php" method="POST">
         <input type="text" name="nombre" placeholder="Nombre completo" required>
         <input type="email" name="correo" placeholder="Correo electrónico" required>
         <div class="password-wrapper">
           <input type="password" id="registerPass" name="contrasena" placeholder="Crear contraseña" required>
           <span class="toggle-password" onclick="togglePassword('registerPass', this)">👁️</span>
         </div>
+        <input type="hidden" name="action" value="register">
         <button type="submit" class="btn">Registrarse</button>
         <p class="form-switch" onclick="switchForm('login')">¿Ya tienes cuenta? Inicia sesión</p>
       </form>
     </div>
   </div>
 
-</head>
-<body>
-    <div class="animsition-overlay">
+  <div class="animsition-overlay">
        
        
         <!-- Nueva sección de Encabezado Principal -->
-        <header class="hero">
-            <div class="hero-content">
-                <h1>SPORT RULES CENTER</h1>
-                <p>Descubre los mejores deportes y aprende sobre ellos</p>
-                <a href="#reglamento" class="btn">Explorar</a>   
-            </div>
-        </header>
+      <header class="hero">
+          <div class="hero-content">
+             <h1>SPORT RULES CENTER</h1>
+             <p>Descubre los mejores deportes y aprende sobre ellos</p>
+             <a href="#reglamento" class="btn">Explorar</a>   
+          </div>
+      </header>
 
-        <section id="reglamento" class="reglamento">
-            <div class="container">
-                <h2>Reglamento Deportivo</h2>
-                <p>El reglamento deportivo asegura que todos los eventos se desarrollen con integridad, seguridad y equidad para todos los participantes. Incluye reglas específicas para cada deporte, así como directrices generales de conducta para atletas, entrenadores y árbitros.</p>
-                <a href="https://www.lifeder.com/reglamento-deportivo/" class="btn">Leer Más</a>
-            </div>
-        </section>
+      <section id="reglamento" class="reglamento">
+          <div class="container">
+              <h2>Reglamento Deportivo</h2>
+              <p>El reglamento deportivo asegura que todos los eventos se desarrollen con integridad, seguridad y equidad para todos los participantes. Incluye reglas específicas para cada deporte, así como directrices generales de conducta para atletas, entrenadores y árbitros.</p>
+              <a href="https://www.lifeder.com/reglamento-deportivo/" class="btn">Leer Más</a>
+          </div>
+      </section>
 
         <!-- Tecnologia y Deporte -->
-        <section id="tecnologia-deporte" class="tecnologia-deporte">
-            <video autoplay muted loop class="video-background">
-                <source src="videos/tecnologiaDeporte.mp4" type="video/mp4">
+      <section id="tecnologia-deporte" class="tecnologia-deporte">
+          <video autoplay muted loop class="video-background">
+              <source src="videos/tecnologiaDeporte.mp4" type="video/mp4">
                 Tu navegador no soporta la reproducción de video.
-            </video>
-            <div class="container">
-                <h2>Tecnología y Deporte</h2>
-                <p>¿Te gusta la tecnología y quieres saber cómo se aplica en los deportes? Descubre cómo la innovación tecnológica está transformando el mundo del deporte, desde el entrenamiento hasta la competición.</p>
-                <a href="deporteytecnologia/tecnologia.html" class="btn">Explorar Más</a>
-            </div>
-        </section>
+          </video>
+          <div class="container">
+              <h2>Tecnología y Deporte</h2>
+              <p>¿Te gusta la tecnología y quieres saber cómo se aplica en los deportes? Descubre cómo la innovación tecnológica está transformando el mundo del deporte, desde el entrenamiento hasta la competición.</p>
+              <a href="deporteytecnologia/tecnologia.html" class="btn">Explorar Más</a>
+          </div>
+      </section>
 
          <!-- Sección de Grupos Deportivos -->
-          <section class="categoria">
-            <section class="deportes-por-grupo">
-                <section class="group-section">
-                    <h3>Deportes por Grupo</h3>
+      <section class="categoria">
+          <section class="deportes-por-grupo">
+              <section class="group-section">
+                  <h3>Deportes por Grupo</h3>
                 <div class="group-navigation">
                     <a href="#deportes-acuaticos" class="group-btn">Deportes Acuáticos</a>
                     <a href="#deportes-atletismo-combate" class="group-btn">Atletismo y Combate</a>
@@ -117,10 +115,10 @@
                     <a href="#deportes-habilidad-precision" class="group-btn">Habilidad y Precisión</a>
                     <a href="#deportes-resistencia-multidisciplina" class="group-btn">Resistencia y Multidisciplina</a>
                 </div>
-                </section>
+              </section>
                 
-            </section>
-          </section>   
+          </section>
+      </section>   
                 
             <!-- Deportes Acuáticos -->
              <section class="categoria">
@@ -700,130 +698,20 @@
             
         </div>
 
-        <footer>
-            <p> AUTORES </p>
-            <p> Sergio Andrés Quimbayo Suarez </p>
-            <p> Victor Hernando Molina Rodriguez</p>
-            <p> ______________________________________________________________________</p>  
-            <p>&copy; 2025 Regulación de Deportes. Todos los derechos reservados.</p>
-            <p> Universidad de Cundinamarca </p>
-            <p> Facultad de Ingeniería - Ingeniería de Sistemas y Computación </p>
-        </footer>
+    <footer>
+        <p> AUTORES </p>
+        <p> Ing. Sergio Andrés Quimbayo Suarez </p>
+        <p> Ing. Víctor Hernando Molina Rodríguez</p>
+        <p> ______________________________________________________________________</p>  
+        <p>&copy; (2025) Regulación de Deportes. Todos los derechos reservados.</p>
+        <p> Universidad de Cundinamarca </p>
+        <p> Facultad de Ingeniería y Tecnologías Emergentes </p> 
+        <p> Ingeniería de Sistemas y Computación </p>
+        <p> Fusagasugá </p>
+        <p> Colombia </p>
+    </footer>
 
-        <script>
-            document.querySelector('.btn').addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        </script>
+    <script src="main.js"></script>
 
-
-    <body>
-        <script src="main.js"></script>
-
-        <script>
-    // Inicialización
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('closeModal').addEventListener('click', () => closeModal());
-      document.getElementById('loginForm').addEventListener('submit', submitLogin);
-      document.getElementById('registerForm').addEventListener('submit', submitRegister);
-    });
-
-    // Abrir modal y mostrar el formulario correcto
-    function openModal(mode) {
-      clearMessage();
-      document.getElementById('modalLogin').classList.add('show');
-      switchForm(mode);
-    }
-    function closeModal() {
-      document.getElementById('modalLogin').classList.remove('show');
-    }
-    function switchForm(mode) {
-      const login = document.getElementById('loginForm');
-      const register = document.getElementById('registerForm');
-      const title = document.getElementById('modalTitle');
-      const desc  = document.getElementById('modalDesc');
-
-      if (mode === 'login') {
-        login.style.display = 'block';
-        register.style.display = 'none';
-        title.textContent = 'Iniciar Sesión';
-        desc.textContent  = 'Introduce tus credenciales';
-      } else {
-        login.style.display = 'none';
-        register.style.display = 'block';
-        title.textContent = 'Regístrate';
-        desc.textContent  = 'Crea tu cuenta nueva';
-      }
-    }
-
-    // Toggle visibilidad de contraseña
-    function togglePassword(id, icon) {
-      const input = document.getElementById(id);
-      input.type = input.type === 'password' ? 'text' : 'password';
-      icon.textContent = input.type === 'password' ? '👁️' : '🙈';
-    }
-
-    // Mostrar mensaje de servidor
-    function showMessage(text, success = false) {
-      const msg = document.getElementById('message');
-      msg.style.color = success ? 'green' : '#c00';
-      msg.textContent = text;
-    }
-    function clearMessage() {
-      document.getElementById('message').textContent = '';
-    }
-
-    // Envío AJAX de login
-    async function submitLogin(e) {
-      e.preventDefault();
-      clearMessage();
-      const form = e.target;
-      const data = new FormData(form);
-
-      try {
-        const res = await fetch('login.php', {
-          method: 'POST',
-          body: data
-        });
-        const text = await res.text();
-        // Asumimos que login.php devuelve "Inicio de sesión exitoso. Bienvenido, Nombre"
-        if (/exitoso/i.test(text)) {
-          showMessage(text, true);
-          setTimeout(closeModal, 1500);
-        } else {
-          showMessage(text, false);
-        }
-      } catch (err) {
-        showMessage('Error al conectar con el servidor.');
-      }
-    }
-
-    // Envío AJAX de registro
-    async function submitRegister(e) {
-      e.preventDefault();
-      clearMessage();
-      const form = e.target;
-      const data = new FormData(form);
-
-      try {
-        const res = await fetch('registro.php', {
-          method: 'POST',
-          body: data
-        });
-        const text = await res.text();
-        if (/éxito/i.test(text) || /registrado/i.test(text)) {
-          showMessage(text, true);
-          // Tras un registro exitoso, volvemos al login
-          setTimeout(() => switchForm('login'), 1500);
-        } else {
-          showMessage(text, false);
-        }
-      } catch (err) {
-        showMessage('Error al conectar con el servidor.');
-      }
-    }
-  </script>
-    </body>
+</body>
 </html>
